@@ -3,7 +3,7 @@
 
 cd /var/www/html/wordpress
 
-if ! wp core is-installed; then
+if ! wp core is-installed --allow-root; then
 	wp config create	--allow-root --dbname=${SQL_DATABASE} \
 		--dbuser=${SQL_USER} \
 		--dbpass=${SQL_PASSWORD} \
@@ -25,17 +25,17 @@ if ! wp core is-installed; then
 	wp cache flush --allow-root
 
 # it provides an easy-to-use interface for creating custom contact forms and managing submissions, as well as supporting various anti-spam techniques
-wp plugin install contact-form-7 --activate
+wp plugin install contact-form-7 --allow-root --activate
 
 # set the site language to English
-wp language core install en_US --activate
+wp language core install en_US --allow-root --activate
 
 # remove default themes and plugins
-wp theme delete twentynineteen twentytwenty
-wp plugin delete hello
+wp theme delete twentynineteen twentytwenty --allow-root
+wp plugin delete hello --allow-root
 
 # set the permalink structure
-wp rewrite structure '/%postname%/'
+wp rewrite structure '/%postname%/' --allow-root
 
 fi
 
@@ -43,5 +43,5 @@ if [ ! -d /run/php ]; then
 	mkdir /run/php;
 fi
 
-# start the PHP FastCGI Process Manager (FPM) for PHP version 7.3 in the foreground
+# start the PHP FastCGI Process Manager (FPM) for PHP version 7.4 in the foreground
 exec /usr/sbin/php-fpm8.2 -F -R

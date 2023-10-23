@@ -1,14 +1,11 @@
 #!/bin/bash
 
+if [ -d "/var/lib/mysql/$SQL_DATABASE" ]
+then
+	echo "Database already exists"
+else
 service mysql start;
 
-# Check if the database already exists
-DB_CHECK=`mysql -uroot -p${DB_ROOT_PASS} -e "SHOW DATABASES LIKE '${DB_NAME}'" | grep ${DB_NAME}`
-
-if [ "$DB_CHECK" == "${DB_NAME}" ]; then
-	exec mysqld_safe
-	echo "MariaDB database launched"
-else
 	# Wait for the database service to start up
 	echo "Waiting for MariaDB to start up..."
 	sleep 10  # Wait for 10 seconds (or more if needed)
@@ -20,9 +17,9 @@ else
 	mysql -uroot -e "FLUSH PRIVILEGES;"
 	mysql -uroot -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${SQL_ROOT_PASSWORD}';"  # Now set the root password
 	mysqladmin -u root -p${SQL_ROOT_PASSWORD} shutdown
-	# Keep the script running to prevent the container from stopping
-	exec mysqld_safe
-	#print status
 	echo "MariaDB database and user were created successfully!"
 fi
+# Keep the script running to prevent the container from stopping
+	exec mysqld_safe
+	#Running mysqld_sage
 
