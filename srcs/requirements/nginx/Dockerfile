@@ -10,12 +10,11 @@ RUN mkdir /etc/nginx/ssl
 
 #generate certif
 RUN openssl req -newkey rsa:4096 -x509 -sha256 -days 365 -nodes \
-       -out /etc/nginx/ssl/kdhrif.crt \
-       -keyout /etc/nginx/ssl/kdhrif.key \
+       -out /etc/nginx/ssl/inception.crt \
+       -keyout /etc/nginx/ssl/inception.key \
        -subj "/C=FR/ST=Paris/L=Paris/O=42 School/OU=kdhrif/CN=kdhrif.42.fr/"
 
 COPY ./conf/nginx.conf /etc/nginx/nginx.conf
-COPY ./conf/index.html /usr/share/nginx/html/index.html
 
 RUN mkdir -p /run/nginx
 

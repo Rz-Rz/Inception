@@ -31,7 +31,6 @@ wp plugin install contact-form-7 --allow-root --activate
 wp language core install en_US --allow-root --activate
 
 # remove default themes and plugins
-wp theme delete twentynineteen twentytwenty --allow-root
 wp plugin delete hello --allow-root
 
 # set the permalink structure

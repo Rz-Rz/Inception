@@ -19,6 +19,7 @@ services:
       timeout: 1s
       retries: 20
       start_period: 5s
+    restart: unless-stopped
 
   wordpress:
     build: ./requirements/wordpress
@@ -37,11 +38,31 @@ services:
       - USER1_PASS=${USER1_PASS}
     volumes:
       - wordpress_data:/var/www/html
+    restart: unless-stopped
     depends_on:
       mariadb:
         condition: service_healthy 
     networks:
       - inception
+
+  nginx:
+    build: ./requirements/nginx
+    volumes:
+      - wordpress_data:/var/www/html
+    depends_on:
+      - wordpress
+    ports:
+      - "443:443"
+    networks:
+      - inception
+    restart: unless-stopped
+    env_file: .env
+    healthcheck:
+      test: 'curl -kfsSL https://localhost:443/status'
+      interval: 5s
+      timeout: 1s
+      retries: 10
+      start_period: 5s
 
 
 volumes:
