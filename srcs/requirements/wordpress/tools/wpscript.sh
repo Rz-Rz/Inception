@@ -17,6 +17,10 @@ if ! wp core is-installed --allow-root; then
 		--admin_password=${ADMIN_PASSWORD} \
 		--admin_email=${ADMIN_EMAIL};
 
+	# Update the 'home' and 'siteurl' options
+	wp option update home https://${DOMAIN_NAME} --allow-root
+	wp option update siteurl https://${DOMAIN_NAME} --allow-root
+
 	wp user create		--allow-root \
 		${USER1_LOGIN} ${USER1_MAIL} \
 		--role=author \
