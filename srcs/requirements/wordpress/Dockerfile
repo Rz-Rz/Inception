@@ -5,7 +5,7 @@ RUN apt-get update -y \
     && wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg \
     && echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | tee /etc/apt/sources.list.d/php.list \
     && apt-get update -y \
-    && apt-get install -y php8.2-fpm php8.2-mysql \
+    && apt-get install -y php8.2-fpm php8.2-mysql redis php-redis \
     && rm -rf /var/lib/apt/lists/*
 
 
