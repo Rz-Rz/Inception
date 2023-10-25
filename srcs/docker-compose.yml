@@ -77,11 +77,24 @@ services:
     volumes:
       - "wordpress_data:/var/www/html"
     networks:
-      - network
+      - inception
     restart: always
     environment:
       FTP_USR: ${FTP_USR}
       FTP_PWD: ${FTP_PWD}
+
+
+  adminer:
+    build: requirements/bonus/adminer
+    container_name: adminer
+    networks:
+      - inception
+    restart: always
+    depends_on:
+      - mariadb
+    expose:
+     - "9000"
+
 
 
 volumes:
