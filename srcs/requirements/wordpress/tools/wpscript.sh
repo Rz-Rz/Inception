@@ -39,6 +39,9 @@ wp language core install en_US --allow-root --activate
 # remove default themes and plugins
 wp plugin delete hello --allow-root
 
+wp theme install twentytwentytwo --allow-root
+wp theme activate twentytwentytwo --allow-root
+
 # set the permalink structure
 wp rewrite structure '/%postname%/' --allow-root
 

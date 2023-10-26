@@ -102,6 +102,12 @@ services:
     networks:
       - inception
 
+  static_page:
+    container_name: static_page
+    build: ./requirements/bonus/static_page
+    restart: always
+    networks:
+      - inception
 
 volumes:
   mariadb_data:
