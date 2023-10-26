@@ -95,6 +95,12 @@ services:
     expose:
      - "9000"
 
+  hugo:
+    container_name: hugo
+    build: ./requirements/bonus/hugo
+    restart: always
+    networks:
+      - inception
 
 
 volumes:

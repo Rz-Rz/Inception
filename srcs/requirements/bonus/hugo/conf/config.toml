@@ -1,0 +1,8 @@
+#baseURL = "https://kdhrif.42.fr/me"
+theme = "m10c"
+paginate = 8
+canonifyURLs = true
+
+[params]
+  author = "Karim Dhrif"
+  description = "Dedicated hugo service for inception project"
